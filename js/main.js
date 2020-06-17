@@ -34,10 +34,8 @@ var getRandomNumberInRange = function (min, max) {
   return Math.floor(rand);
 };
 
-
-var getRandomStringInArray = function () {
-  var arr = arr[getRandomNumberInRange(0, arr.length - 1)];
-  return arr;
+var getRandomStringInArray = function (arr) {
+  return arr[getRandomNumberInRange(0, arr.length - 1)];
 };
 
 var createApartment = function () {
