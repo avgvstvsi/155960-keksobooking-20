@@ -34,7 +34,7 @@ var templatePin = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
 
-// Генерация 8 объектов со случайными параметрами
+// Генерация 8 объектов
 var getRandomNumberInRange = function (min, max) {
   var rand = min + Math.random() * (max + 1 - min);
   return Math.floor(rand);
