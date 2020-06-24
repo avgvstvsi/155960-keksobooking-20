@@ -146,7 +146,7 @@ var renderActivePosition = function () {
   address.value = Math.floor(MAP_WIDTH / 2) + ', ' + Math.floor((MAP_HEIGHT / 2) + (MAP_PIN_SIZE / 2) + MAP_PIN_STING);
 };
 
-// Валидация соответствия гостей и комнат
+// Валидация гостей и комнат
 var guests = adForm.querySelector('select[name="capacity"');
 var rooms = adForm.querySelector('select[name="rooms"]');
 
