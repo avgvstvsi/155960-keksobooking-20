@@ -16,11 +16,16 @@ var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'co
 var OFFER_DESCRIPTION = 'Строка с описанием 0';
 var OFFER_PHOTOS = 'http://o0.github.io/assets/images/tokyo/hotel';
 var NUMBER_PINS = 8;
+var NUMBER_OF_ROOMS = '100';
 
 var LOCATION_X_MIN = 200;
 var LOCATION_X_MAX = 1200;
 var LOCATION_Y_MIN = 130;
 var LOCATION_Y_MAX = 630;
+var MAP_WIDTH = 1200;
+var MAP_HEIGHT = 750;
+var MAP_PIN_SIZE = 65;
+var MAP_PIN_STING = 22;
 
 var mapFaded = document.querySelector('.map');
 var mapPin = document.querySelector('.map__pin--main');
@@ -34,7 +39,7 @@ var templatePin = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
 
-// Генерация 8 объектов со случайными параметрами
+// Генерация 8 объектов
 var getRandomNumberInRange = function (min, max) {
   var rand = min + Math.random() * (max + 1 - min);
   return Math.floor(rand);
@@ -96,8 +101,6 @@ var renderPins = function (pinsData) {
   mapPins.appendChild(fragment);
 };
 
-renderPins(createApartment());
-
 // Активация страницы
 var hideForms = function (element, isDisabled) {
   for (var i = 0; i < element.length; i++) {
@@ -109,10 +112,13 @@ hideForms(mapFilterInputs, true);
 hideForms(adFormInputs, true);
 
 var showForms = function () {
+  renderPins(createApartment());
   mapFaded.classList.remove('map--faded');
   adForm.classList.remove('ad-form--disabled');
   hideForms(mapFilterInputs, false);
   hideForms(adFormInputs, false);
+  renderActivePosition();
+  getRoomsAndGuests();
 };
 
 mapPin.addEventListener('mousedown', function (evt) {
@@ -126,3 +132,33 @@ mapPin.addEventListener('keydown', function (evt) {
     showForms();
   }
 });
+
+// Определение начальных координат метки
+var address = document.querySelector('#address');
+
+var renderInactivePosition = function () {
+  address.value = Math.floor(MAP_WIDTH / 2) + ', ' + Math.floor(MAP_HEIGHT / 2);
+};
+
+renderInactivePosition();
+
+var renderActivePosition = function () {
+  address.value = Math.floor(MAP_WIDTH / 2) + ', ' + Math.floor((MAP_HEIGHT / 2) + (MAP_PIN_SIZE / 2) + MAP_PIN_STING);
+};
+
+// Валидация соответствия гостей и комнат
+var guests = adForm.querySelector('select[name="capacity"');
+var rooms = adForm.querySelector('select[name="rooms"]');
+
+var getRoomsAndGuests = function () {
+  if (rooms.value === NUMBER_OF_ROOMS) {
+    guests.setCustomValidity('Комната не для гостей');
+  } else if (rooms.value < guests.value) {
+    guests.setCustomValidity('Выберите большее количество гостей');
+  } else {
+    guests.setCustomValidity('');
+  }
+};
+
+rooms.addEventListener('change', getRoomsAndGuests);
+guests.addEventListener('change', getRoomsAndGuests);
