@@ -18,13 +18,13 @@
   hideForms(adFormInputs, true);
 
   var showForms = function () {
-    window.pin.renderPins(window.data.createApartment());
     mapFaded.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     hideForms(mapFilterInputs, false);
     hideForms(adFormInputs, false);
     window.pin.renderActivePosition();
     window.form.getRoomsAndGuests();
+    window.load(window.pin.renderPins, function () {});
   };
 
   window.main = {
