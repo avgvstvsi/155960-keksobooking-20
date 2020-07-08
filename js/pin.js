@@ -3,6 +3,7 @@
 (function () {
   var MAP_PIN_SIZE = 65;
   var MAP_PIN_STING = 22;
+  var MAX_PINS = 5;
 
   var mapPin = document.querySelector('.map__pin--main');
   var mapPins = document.querySelector('.map__pins');
@@ -30,7 +31,8 @@
 
   var renderPins = function (pinsData) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < pinsData.length; i++) {
+    var pinsCount = (pinsData.length > MAX_PINS) ? pinsCount = MAX_PINS : pinsCount = pinsData.length;
+    for (var i = 0; i < pinsCount; i++) {
       fragment.appendChild(getPinTemplate(pinsData[i]));
     }
     mapPins.appendChild(fragment);
