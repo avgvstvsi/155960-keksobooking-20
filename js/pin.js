@@ -31,7 +31,7 @@
 
   var renderPins = function (pinsData) {
     var fragment = document.createDocumentFragment();
-    var pinsCount = (pinsData.length > MAX_PINS) ? pinsCount = MAX_PINS : pinsCount = pinsData.length;
+    var pinsCount = pinsData.length > MAX_PINS ? MAX_PINS : pinsData.length;
     for (var i = 0; i < pinsCount; i++) {
       fragment.appendChild(getPinTemplate(pinsData[i]));
     }
