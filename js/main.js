@@ -25,7 +25,7 @@
     window.pin.renderActivePosition();
     window.form.getRoomsAndGuests();
     window.load(window.pin.renderPins, function () {});
-    window.card.renderCard();
+    window.load(window.card.renderCard, function () {});
   };
 
   window.main = {
