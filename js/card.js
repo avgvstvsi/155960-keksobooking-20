@@ -38,7 +38,7 @@
       cardElement.appendChild(cardPhotos);
     }
 
-    cardElement.querySelector('.popup__avatar').textContent = data.author.avatar;
+    cardElement.querySelector('.popup__avatar').src = data.author.avatar;
 
     return cardElement;
   };
