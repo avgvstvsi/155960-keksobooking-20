@@ -1,10 +1,18 @@
 'use strict';
 
 (function () {
-  var mapPins = document.querySelector('.map__pins');
+  var mapFaded = document.querySelector('.map');
   var cardTemplate = document.querySelector('#card')
   .content
   .querySelector('.map__card');
+
+  var ImgProperties = {
+    IMG_WIDTH: '45px',
+    IMG_HEIGHT: '40px',
+    IMG_ALT: 'Фотография жилья',
+  };
+
+  var ESCAPE = 27;
 
   var getPinCard = function (data) {
     var cardElement = cardTemplate.cloneNode(true);
@@ -30,27 +38,43 @@
     cardElement.querySelector('.popup__description').textContent = data.offer.description;
 
     var cardPhotos = cardElement.querySelector('.popup__photos');
-    for (var i = 0; i < data.offer.photos.length; i++) {
-      var cardPhoto = cardElement.querySelector('.popup__photos').querySelector('.popup__photo').cloneNode(true);
 
-      cardPhoto.src = data.offer.photos[i];
-      cardPhotos.appendChild(cardPhoto);
-      cardElement.appendChild(cardPhotos);
+    for (var i = 0; i < data.offer.photos.length; i++) {
+      var newImg = document.createElement('img');
+      newImg.src = data.offer.photos[i];
+      newImg.classList.add('popup__photo');
+      newImg.style.width = ImgProperties.IMG_WIDTH;
+      newImg.style.height = ImgProperties.IMG_HEIGHT;
+      newImg.alt = ImgProperties.IMG_ALT;
+      cardPhotos.appendChild(newImg);
     }
 
     cardElement.querySelector('.popup__avatar').src = data.author.avatar;
+    var mapFiltersContainer = document.querySelector('.map__filters-container');
+    var closeCardBtn = cardElement.querySelector('.popup__close');
+    var closeCard = function () {
+      var popup = mapFaded.querySelector('.popup');
+      popup.remove();
+      closeCardBtn.removeEventListener('click', closeCardEnter);
+      closeCardBtn.removeEventListener('keydown', closeCardEsc);
+    };
+    var closeCardEnter = function () {
+      closeCard();
+    };
+    var closeCardEsc = function (evt) {
+      if (evt.keyCode === ESCAPE) {
+        closeCard();
+      }
+    };
+    closeCardBtn.addEventListener('click', closeCardEnter);
+    document.addEventListener('keydown', closeCardEsc);
+    mapFaded.insertBefore(cardElement, mapFiltersContainer);
 
     return cardElement;
   };
 
-  var renderCard = function (pinsData) {
-    var fragment = document.createDocumentFragment();
-    fragment.appendChild(getPinCard(pinsData[0]));
-    mapPins.appendChild(fragment);
-  };
-
   window.card = {
-    renderCard: renderCard
+    getPinCard: getPinCard
   };
 
 })();

@@ -5,6 +5,7 @@
   var MAP_PIN_STING = 22;
   var MAX_PINS = 5;
 
+  var mapFaded = document.querySelector('.map');
   var mapPin = document.querySelector('.map__pin--main');
   var mapPins = document.querySelector('.map__pins');
   var templatePin = document.querySelector('#pin')
@@ -25,6 +26,16 @@
     pinElement.style = 'left: ' + data.location.x + 'px; top: ' + data.location.y + 'px;';
     pinIcon.src = data.author.avatar;
     pinIcon.alt = data.offer.title;
+
+    var openPopup = function () {
+      var popup = mapFaded.querySelector('.popup');
+      if (popup) {
+        popup.remove();
+      }
+      window.card.getPinCard(data);
+    };
+
+    pinElement.addEventListener('click', openPopup);
 
     return pinElement;
   };
