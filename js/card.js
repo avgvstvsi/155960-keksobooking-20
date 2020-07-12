@@ -6,6 +6,12 @@
   .content
   .querySelector('.map__card');
 
+  var ImgProperties = {
+    IMG_WIDTH: '45px',
+    IMG_HEIGHT: '40px',
+    IMG_ALT: 'Фотография жилья',
+  };
+
   var getPinCard = function (data) {
     var cardElement = cardTemplate.cloneNode(true);
 
@@ -30,12 +36,15 @@
     cardElement.querySelector('.popup__description').textContent = data.offer.description;
 
     var cardPhotos = cardElement.querySelector('.popup__photos');
-    for (var i = 0; i < data.offer.photos.length; i++) {
-      var cardPhoto = cardElement.querySelector('.popup__photos').querySelector('.popup__photo').cloneNode(true);
 
-      cardPhoto.src = data.offer.photos[i];
-      cardPhotos.appendChild(cardPhoto);
-      cardElement.appendChild(cardPhotos);
+    for (var i = 0; i < data.offer.photos.length; i++) {
+      var newImg = document.createElement('img');
+      newImg.src = data.offer.photos[i];
+      newImg.classList.add('popup__photo');
+      newImg.style.width = ImgProperties.IMG_WIDTH;
+      newImg.style.height = ImgProperties.IMG_HEIGHT;
+      newImg.alt = ImgProperties.IMG_ALT;
+      cardPhotos.appendChild(newImg);
     }
 
     cardElement.querySelector('.popup__avatar').src = data.author.avatar;
