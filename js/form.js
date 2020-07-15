@@ -25,22 +25,17 @@
   };
 
   var getMinPrice = function (type) {
-    var minPrice = 0;
     switch (type) {
-      case 'bungalo':
-        minPrice = 0;
-        break;
       case 'flat':
-        minPrice = 1000;
-        break;
+        return 1000;
       case 'house':
-        minPrice = 5000;
-        break;
+        return 5000;
       case 'palace':
-        minPrice = 10000;
-        break;
+        return 10000;
+      case 'bungalo':
+      default:
+        return 0;
     }
-    return minPrice;
   };
 
   var changeMinPriceValue = function () {

@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var MAP_PIN_SIZE = 65;
+  var MAP_PIN_SIZE = 62;
   var MAP_PIN_STING = 22;
   var MAX_PINS = 5;
 
@@ -14,7 +14,7 @@
 
   var MapSize = {
     MAP_WIDTH: 1200,
-    MAP_HEIGHT: 750,
+    MAP_HEIGHT: 704,
   };
 
   var ENTER = 13;
@@ -32,7 +32,7 @@
       if (popup) {
         popup.remove();
       }
-      window.card.getPinCard(data);
+      window.card.getPinCardData(data);
     };
 
     pinElement.addEventListener('click', openPopup);

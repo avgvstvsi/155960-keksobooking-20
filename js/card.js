@@ -14,7 +14,7 @@
 
   var ESCAPE = 27;
 
-  var getPinCard = function (data) {
+  var getPinCardData = function (data) {
     var cardElement = cardTemplate.cloneNode(true);
 
     cardElement.querySelector('.popup__title').textContent = data.offer.title;
@@ -50,31 +50,35 @@
     }
 
     cardElement.querySelector('.popup__avatar').src = data.author.avatar;
+    getCardState(cardElement);
+    return cardElement;
+  };
+
+  var getCardState = function (cardElement) {
     var mapFiltersContainer = document.querySelector('.map__filters-container');
     var closeCardBtn = cardElement.querySelector('.popup__close');
     var closeCard = function () {
       var popup = mapFaded.querySelector('.popup');
       popup.remove();
-      closeCardBtn.removeEventListener('click', closeCardEnter);
-      closeCardBtn.removeEventListener('keydown', closeCardEsc);
+      closeCardBtn.removeEventListener('click', onCloseCardEnter);
+      closeCardBtn.removeEventListener('keydown', onCloseCardEsc);
     };
-    var closeCardEnter = function () {
+    var onCloseCardEnter = function () {
       closeCard();
     };
-    var closeCardEsc = function (evt) {
+    var onCloseCardEsc = function (evt) {
       if (evt.keyCode === ESCAPE) {
         closeCard();
       }
+      document.removeEventListener('keydown', onCloseCardEsc);
     };
-    closeCardBtn.addEventListener('click', closeCardEnter);
-    document.addEventListener('keydown', closeCardEsc);
+    closeCardBtn.addEventListener('click', onCloseCardEnter);
+    document.addEventListener('keydown', onCloseCardEsc);
     mapFaded.insertBefore(cardElement, mapFiltersContainer);
-
-    return cardElement;
   };
 
   window.card = {
-    getPinCard: getPinCard
+    getPinCardData: getPinCardData
   };
 
 })();
