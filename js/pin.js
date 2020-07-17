@@ -13,8 +13,8 @@
       .querySelector('.map__pin');
 
   var MapSize = {
-    MAP_WIDTH: 1200,
-    MAP_HEIGHT: 704,
+    WIDTH: 1200,
+    HEIGHT: 704,
   };
 
   var ENTER = 13;
@@ -65,13 +65,13 @@
   var address = document.querySelector('#address');
 
   var renderInactivePosition = function () {
-    address.value = Math.floor(MapSize.MAP_WIDTH / 2) + ', ' + Math.floor(MapSize.MAP_HEIGHT / 2);
+    address.value = Math.floor(MapSize.WIDTH / 2) + ', ' + Math.floor(MapSize.HEIGHT / 2);
   };
 
   renderInactivePosition();
 
   var renderActivePosition = function () {
-    address.value = Math.floor(MapSize.MAP_WIDTH / 2) + ', ' + Math.floor((MapSize.MAP_HEIGHT / 2) + (MAP_PIN_SIZE / 2) + MAP_PIN_STING);
+    address.value = Math.floor(MapSize.WIDTH / 2) + ', ' + Math.floor((MapSize.HEIGHT / 2) + (MAP_PIN_SIZE / 2) + MAP_PIN_STING);
   };
 
   window.pin = {

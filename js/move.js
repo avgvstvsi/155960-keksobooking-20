@@ -3,8 +3,8 @@
 (function () {
   var mapPin = document.querySelector('.map__pin--main');
   var MapPinSize = {
-    MAP_PIN_WIDTH: 62,
-    MAP_PIN_HEIGNH: 84,
+    WIDTH: 62,
+    HEIGHT: 84,
   };
   var blockAdress = document.querySelector('#address');
 
@@ -39,13 +39,13 @@
       mapPin.style.top = (mapPin.offsetTop - shift.y) + 'px';
       mapPin.style.left = (mapPin.offsetLeft - shift.x) + 'px';
 
-      var halfWidth = MapPinSize.MAP_PIN_WIDTH / 2;
+      var halfWidth = MapPinSize.WIDTH / 2;
       var coordMaxX = CoordinatesLimit.X_MAX - halfWidth;
       var coordMinX = CoordinatesLimit.X_MIN - halfWidth;
       var coordMaxY = CoordinatesLimit.Y_MAX - mapPin.offsetHeight;
       var coordMinY = CoordinatesLimit.Y_MIN - mapPin.offsetHeight;
 
-      blockAdress.value = (mapPin.offsetLeft - shift.x + halfWidth) + ', ' + (mapPin.offsetTop - shift.y + MapPinSize.MAP_PIN_HEIGNH);
+      blockAdress.value = (mapPin.offsetLeft - shift.x + halfWidth) + ', ' + (mapPin.offsetTop - shift.y + MapPinSize.HEIGHT);
 
       if (mapPin.offsetLeft > coordMaxX) {
         mapPin.style.left = coordMaxX + 'px';

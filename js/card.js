@@ -7,9 +7,9 @@
   .querySelector('.map__card');
 
   var ImgProperties = {
-    IMG_WIDTH: '45px',
-    IMG_HEIGHT: '40px',
-    IMG_ALT: 'Фотография жилья',
+    WIDTH: '45px',
+    HEIGHT: '40px',
+    ALT: 'Фотография жилья',
   };
 
   var ESCAPE = 27;
@@ -43,9 +43,9 @@
       var newImg = document.createElement('img');
       newImg.src = data.offer.photos[i];
       newImg.classList.add('popup__photo');
-      newImg.style.width = ImgProperties.IMG_WIDTH;
-      newImg.style.height = ImgProperties.IMG_HEIGHT;
-      newImg.alt = ImgProperties.IMG_ALT;
+      newImg.style.width = ImgProperties.WIDTH;
+      newImg.style.height = ImgProperties.HEIGHT;
+      newImg.alt = ImgProperties.ALT;
       cardPhotos.appendChild(newImg);
     }
 
@@ -62,6 +62,7 @@
       popup.remove();
       closeCardBtn.removeEventListener('click', onCloseCardEnter);
       closeCardBtn.removeEventListener('keydown', onCloseCardEsc);
+      document.removeEventListener('keydown', onCloseCardEsc);
     };
     var onCloseCardEnter = function () {
       closeCard();
@@ -70,7 +71,7 @@
       if (evt.keyCode === ESCAPE) {
         closeCard();
       }
-      document.removeEventListener('keydown', onCloseCardEsc);
+
     };
     closeCardBtn.addEventListener('click', onCloseCardEnter);
     document.addEventListener('keydown', onCloseCardEsc);
