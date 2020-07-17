@@ -1,10 +1,11 @@
 'use strict';
 
 (function () {
-  var MAP_PIN_SIZE = 65;
+  var MAP_PIN_SIZE = 62;
   var MAP_PIN_STING = 22;
   var MAX_PINS = 5;
 
+  var mapFaded = document.querySelector('.map');
   var mapPin = document.querySelector('.map__pin--main');
   var mapPins = document.querySelector('.map__pins');
   var templatePin = document.querySelector('#pin')
@@ -13,7 +14,7 @@
 
   var MapSize = {
     MAP_WIDTH: 1200,
-    MAP_HEIGHT: 750,
+    MAP_HEIGHT: 704,
   };
 
   var ENTER = 13;
@@ -25,6 +26,16 @@
     pinElement.style = 'left: ' + data.location.x + 'px; top: ' + data.location.y + 'px;';
     pinIcon.src = data.author.avatar;
     pinIcon.alt = data.offer.title;
+
+    var openPopup = function () {
+      var popup = mapFaded.querySelector('.popup');
+      if (popup) {
+        popup.remove();
+      }
+      window.card.getPinCardData(data);
+    };
+
+    pinElement.addEventListener('click', openPopup);
 
     return pinElement;
   };

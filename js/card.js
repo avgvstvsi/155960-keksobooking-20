@@ -1,12 +1,20 @@
 'use strict';
 
 (function () {
-  var mapPins = document.querySelector('.map__pins');
+  var mapFaded = document.querySelector('.map');
   var cardTemplate = document.querySelector('#card')
   .content
   .querySelector('.map__card');
 
-  var getPinCard = function (data) {
+  var ImgProperties = {
+    IMG_WIDTH: '45px',
+    IMG_HEIGHT: '40px',
+    IMG_ALT: 'Фотография жилья',
+  };
+
+  var ESCAPE = 27;
+
+  var getPinCardData = function (data) {
     var cardElement = cardTemplate.cloneNode(true);
 
     cardElement.querySelector('.popup__title').textContent = data.offer.title;
@@ -30,27 +38,47 @@
     cardElement.querySelector('.popup__description').textContent = data.offer.description;
 
     var cardPhotos = cardElement.querySelector('.popup__photos');
-    for (var i = 0; i < data.offer.photos.length; i++) {
-      var cardPhoto = cardElement.querySelector('.popup__photos').querySelector('.popup__photo').cloneNode(true);
 
-      cardPhoto.src = data.offer.photos[i];
-      cardPhotos.appendChild(cardPhoto);
-      cardElement.appendChild(cardPhotos);
+    for (var i = 0; i < data.offer.photos.length; i++) {
+      var newImg = document.createElement('img');
+      newImg.src = data.offer.photos[i];
+      newImg.classList.add('popup__photo');
+      newImg.style.width = ImgProperties.IMG_WIDTH;
+      newImg.style.height = ImgProperties.IMG_HEIGHT;
+      newImg.alt = ImgProperties.IMG_ALT;
+      cardPhotos.appendChild(newImg);
     }
 
     cardElement.querySelector('.popup__avatar').src = data.author.avatar;
-
+    getCardState(cardElement);
     return cardElement;
   };
 
-  var renderCard = function (pinsData) {
-    var fragment = document.createDocumentFragment();
-    fragment.appendChild(getPinCard(pinsData[0]));
-    mapPins.appendChild(fragment);
+  var getCardState = function (cardElement) {
+    var mapFiltersContainer = document.querySelector('.map__filters-container');
+    var closeCardBtn = cardElement.querySelector('.popup__close');
+    var closeCard = function () {
+      var popup = mapFaded.querySelector('.popup');
+      popup.remove();
+      closeCardBtn.removeEventListener('click', onCloseCardEnter);
+      closeCardBtn.removeEventListener('keydown', onCloseCardEsc);
+    };
+    var onCloseCardEnter = function () {
+      closeCard();
+    };
+    var onCloseCardEsc = function (evt) {
+      if (evt.keyCode === ESCAPE) {
+        closeCard();
+      }
+      document.removeEventListener('keydown', onCloseCardEsc);
+    };
+    closeCardBtn.addEventListener('click', onCloseCardEnter);
+    document.addEventListener('keydown', onCloseCardEsc);
+    mapFaded.insertBefore(cardElement, mapFiltersContainer);
   };
 
   window.card = {
-    renderCard: renderCard
+    getPinCardData: getPinCardData
   };
 
 })();
