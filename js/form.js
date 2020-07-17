@@ -12,7 +12,8 @@
   var selectType = adForm.querySelector('select[name="type"]');
   var timeIn = adForm.querySelector('#timein');
   var timeOut = adForm.querySelector('#timeout');
-
+  var resetFormButton = adForm.querySelector('.ad-form__reset');
+  var main = document.querySelector('main');
 
   var getRoomsAndGuests = function () {
     if (rooms.value === NUMBER_OF_ROOMS) {
@@ -53,6 +54,75 @@
 
   timeOut.addEventListener('change', function () {
     timeIn.value = timeOut.value;
+  });
+
+  var createSuccessMessage = function () {
+
+    var successForm = document.querySelector('#success')
+      .content
+      .querySelector('.success');
+
+    main.appendChild(successForm);
+
+    var onEscPress = function (evt) {
+      if (evt.key === 'Escape') {
+        successForm.remove();
+      }
+      document.removeEventListener('keydown', onEscPress);
+      document.removeEventListener('click', onClick);
+    };
+
+    var onClick = function () {
+      successForm.remove();
+      document.removeEventListener('click', onClick);
+      document.removeEventListener('keydown', onEscPress);
+    };
+
+    document.addEventListener('keydown', onEscPress);
+    document.addEventListener('click', onClick);
+  };
+
+  var createErrorMessage = function () {
+
+    var errorForm = document.querySelector('#error')
+      .content
+      .querySelector('.error');
+
+    main.appendChild(errorForm);
+
+    var onEscPress = function (evt) {
+      if (evt.key === 'Escape') {
+        errorForm.remove();
+      }
+      document.removeEventListener('keydown', onEscPress);
+      document.removeEventListener('click', onClick);
+    };
+
+    var onClick = function () {
+      errorForm.remove();
+      document.removeEventListener('click', onClick);
+      document.removeEventListener('keydown', onEscPress);
+    };
+
+    document.addEventListener('keydown', onEscPress);
+    document.addEventListener('click', onClick);
+  };
+
+  var onSubmit = function (evt) {
+    window.upload(new FormData(adForm), function () {
+      createSuccessMessage();
+      adForm.reset();
+      window.main.hideForms();
+    }, function () {
+      createErrorMessage();
+    });
+    evt.preventDefault();
+  };
+
+  adForm.addEventListener('submit', onSubmit);
+
+  resetFormButton.addEventListener('click', function () {
+    adForm.reset();
   });
 
   window.form = {

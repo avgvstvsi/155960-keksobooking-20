@@ -9,8 +9,8 @@
   var mapPin = document.querySelector('.map__pin--main');
   var mapPins = document.querySelector('.map__pins');
   var templatePin = document.querySelector('#pin')
-      .content
-      .querySelector('.map__pin');
+    .content
+    .querySelector('.map__pin');
 
   var MapSize = {
     WIDTH: 1200,
