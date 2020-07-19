@@ -42,24 +42,29 @@
 
   var renderPins = function (pinsData) {
     var fragment = document.createDocumentFragment();
-    var pinsCount = (pinsData.length > MAX_PINS) ? pinsCount = MAX_PINS : pinsCount = pinsData.length;
+    var pinsCount = (pinsData.length > MAX_PINS) ? MAX_PINS : pinsData.length;
     for (var i = 0; i < pinsCount; i++) {
       fragment.appendChild(getPinTemplate(pinsData[i]));
     }
-    mapPins.appendChild(fragment);
+    mapPin.removeEventListener('mousedown', renderPinsClick);
+    mapPin.removeEventListener('keydown', renderPinsEnter);
+    return mapPins.appendChild(fragment);
   };
 
-  mapPin.addEventListener('mousedown', function (evt) {
+  var renderPinsClick = function (evt) {
     if (evt.button === MAIN_BUTTON) {
       window.main.showForms();
     }
-  });
+  };
 
-  mapPin.addEventListener('keydown', function (evt) {
+  var renderPinsEnter = function (evt) {
     if (evt.keyCode === ENTER) {
       window.main.showForms();
     }
-  });
+  };
+
+  mapPin.addEventListener('mousedown', renderPinsClick);
+  mapPin.addEventListener('keydown', renderPinsEnter);
 
   // Определение начальных координат метки
   var address = document.querySelector('#address');
