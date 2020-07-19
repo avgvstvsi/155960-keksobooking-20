@@ -71,7 +71,6 @@
       if (evt.keyCode === ESCAPE) {
         closeCard();
       }
-
     };
     closeCardBtn.addEventListener('click', onCloseCardEnter);
     document.addEventListener('keydown', onCloseCardEsc);
@@ -81,5 +80,4 @@
   window.card = {
     getPinCardData: getPinCardData
   };
-
 })();
