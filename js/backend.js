@@ -46,7 +46,6 @@
       } else {
         onError(xhr.statusText);
       }
-
     });
 
     xhr.open('POST', URL);

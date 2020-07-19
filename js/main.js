@@ -32,7 +32,6 @@
     adForm.classList.add('ad-form--disabled');
     hidingForms(mapFilterInputs, true);
     hidingForms(adFormInputs, true);
-    window.pin.renderPins.remove();
   };
 
   window.main = {
