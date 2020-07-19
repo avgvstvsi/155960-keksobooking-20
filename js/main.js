@@ -8,26 +8,34 @@
   var mapFilterInputs = mapFilter.children;
 
   // Активация страницы
-  var hideForms = function (element, isDisabled) {
+  var hidingForms = function (element, isDisabled) {
     for (var i = 0; i < element.length; i++) {
       element[i].disabled = isDisabled;
     }
   };
 
-  hideForms(mapFilterInputs, true);
-  hideForms(adFormInputs, true);
+  hidingForms(mapFilterInputs, true);
+  hidingForms(adFormInputs, true);
 
   var showForms = function () {
     mapFaded.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
-    hideForms(mapFilterInputs, false);
-    hideForms(adFormInputs, false);
+    hidingForms(mapFilterInputs, false);
+    hidingForms(adFormInputs, false);
     window.pin.renderActivePosition();
     window.form.getRoomsAndGuests();
     window.load(window.pin.renderPins, function () {});
   };
 
+  var hideForms = function () {
+    mapFaded.classList.add('map--faded');
+    adForm.classList.add('ad-form--disabled');
+    hidingForms(mapFilterInputs, true);
+    hidingForms(adFormInputs, true);
+  };
+
   window.main = {
-    showForms: showForms
+    showForms: showForms,
+    hideForms: hideForms
   };
 })();
