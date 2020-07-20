@@ -41,6 +41,7 @@
   };
 
   var renderPins = function (pinsData) {
+    clearPins();
     var fragment = document.createDocumentFragment();
     var pinsCount = (pinsData.length > MAX_PINS) ? MAX_PINS : pinsData.length;
     for (var i = 0; i < pinsCount; i++) {
@@ -49,6 +50,13 @@
     mapPin.removeEventListener('mousedown', renderPinsClick);
     mapPin.removeEventListener('keydown', renderPinsEnter);
     return mapPins.appendChild(fragment);
+  };
+
+  var clearPins = function () {
+    var pinsToRemove = mapPins.querySelectorAll('.map__pin:not(.map__pin--main)');
+    pinsToRemove.forEach(function (i) {
+      i.remove();
+    });
   };
 
   var renderPinsClick = function (evt) {
