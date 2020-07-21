@@ -57,19 +57,15 @@
   var getCardState = function (cardElement) {
     var mapFiltersContainer = document.querySelector('.map__filters-container');
     var closeCardBtn = cardElement.querySelector('.popup__close');
-    var closeCard = function () {
-      var popup = mapFaded.querySelector('.popup');
-      popup.remove();
-      closeCardBtn.removeEventListener('click', onCloseCardEnter);
-      closeCardBtn.removeEventListener('keydown', onCloseCardEsc);
-      document.removeEventListener('keydown', onCloseCardEsc);
-    };
     var onCloseCardEnter = function () {
       closeCard();
+      closeCardBtn.removeEventListener('click', onCloseCardEnter);
     };
     var onCloseCardEsc = function (evt) {
       if (evt.keyCode === ESCAPE) {
         closeCard();
+        closeCardBtn.removeEventListener('keydown', onCloseCardEsc);
+        document.removeEventListener('keydown', onCloseCardEsc);
       }
     };
     closeCardBtn.addEventListener('click', onCloseCardEnter);
@@ -77,7 +73,15 @@
     mapFaded.insertBefore(cardElement, mapFiltersContainer);
   };
 
+  var closeCard = function () {
+    var popup = document.querySelector('.popup');
+    if (popup) {
+      popup.remove();
+    }
+  };
+
   window.card = {
-    getPinCardData: getPinCardData
+    getPinCardData: getPinCardData,
+    closeCard: closeCard
   };
 })();

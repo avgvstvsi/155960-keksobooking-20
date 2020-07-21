@@ -6,8 +6,8 @@
   var mapFaded = document.querySelector('.map');
   var mapFilter = document.querySelector('.map__filters');
   var mapFilterInputs = mapFilter.children;
+  var offers = [];
 
-  // Активация страницы
   var hidingForms = function (element, isDisabled) {
     for (var i = 0; i < element.length; i++) {
       element[i].disabled = isDisabled;
@@ -24,7 +24,12 @@
     hidingForms(adFormInputs, false);
     window.pin.renderActivePosition();
     window.form.getRoomsAndGuests();
-    window.load(window.pin.renderPins, function () {});
+    window.backend.load(function (pinsData) {
+      offers = pinsData;
+      window.filter.activateFilters(offers);
+      var filtredOffers = window.filter.updateOffers(offers);
+      window.pin.renderPins(filtredOffers);
+    }, function () {});
   };
 
   var hideForms = function () {
@@ -36,6 +41,7 @@
 
   window.main = {
     showForms: showForms,
-    hideForms: hideForms
+    hideForms: hideForms,
+    offers: offers
   };
 })();

@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  window.load = function (onSuccess, onError) {
+  var load = function (onSuccess, onError) {
     var URL = 'https://javascript.pages.academy/keksobooking/data';
     var TIMEOUT_IN_MS = 10000;
     var StatusCode = {
@@ -31,7 +31,7 @@
     xhr.send();
   };
 
-  window.upload = function (data, onSuccess, onError) {
+  var upload = function (data, onSuccess, onError) {
     var URL = 'https://javascript.pages.academy/keksobooking';
     var StatusCode = {
       OK: 200
@@ -50,5 +50,10 @@
 
     xhr.open('POST', URL);
     xhr.send(data);
+  };
+
+  window.backend = {
+    load: load,
+    upload: upload
   };
 })();

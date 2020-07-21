@@ -109,7 +109,7 @@
   };
 
   var onSubmit = function (evt) {
-    window.upload(new FormData(adForm), function () {
+    window.backend.upload(new FormData(adForm), function () {
       createSuccessMessage();
       adForm.reset();
       window.main.hideForms();
