@@ -49,7 +49,14 @@
 
   var updateOffers = function (offers) {
     var offersCopy = offers.slice();
-    var filterValue = offersCopy.filter(filterHousingType).filter(filterHousingRooms).filter(filterHousingGuests).filter(filterHousingFeatures).filter(filterHousingPrice);
+    var filterValue = [];
+    filterValue = offersCopy.filter(function (adv) {
+      return filterHousingType(adv) &&
+      filterHousingPrice(adv) &&
+      filterHousingRooms(adv) &&
+      filterHousingGuests(adv) &&
+      filterHousingFeatures(adv);
+    });
     return filterValue;
   };
 
