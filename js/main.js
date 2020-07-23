@@ -37,6 +37,9 @@
     adForm.classList.add('ad-form--disabled');
     hidingForms(mapFilterInputs, true);
     hidingForms(adFormInputs, true);
+    window.pin.clearPins();
+    window.avatar.removeHousePhotos();
+    window.avatar.removeHeaderPhotos();
   };
 
   window.main = {

@@ -4,23 +4,21 @@
   var MAP_PIN_SIZE = 62;
   var MAP_PIN_STING = 22;
   var MAX_PINS = 5;
+  var ENTER = 13;
+  var MAIN_BUTTON = 0;
 
   var mapFaded = document.querySelector('.map');
   var mapPin = document.querySelector('.map__pin--main');
   var mapPins = document.querySelector('.map__pins');
-  var templatePin = document.querySelector('#pin')
-    .content
-    .querySelector('.map__pin');
 
   var MapSize = {
     WIDTH: 1200,
     HEIGHT: 704,
   };
 
-  var ENTER = 13;
-  var MAIN_BUTTON = 0;
-
-  // var mapFilter = document.querySelector('.map__filters');
+  var templatePin = document.querySelector('#pin')
+    .content
+    .querySelector('.map__pin');
 
   var getPinTemplate = function (data) {
     var pinElement = templatePin.cloneNode(true);
@@ -55,8 +53,7 @@
   });
 
   var clearPins = function () {
-    var pinsToRemove = mapPins.querySelectorAll('.map__pin:not(.map__pin--main)');
-    pinsToRemove.forEach(function (pin) {
+    mapPins.querySelectorAll('.map__pin:not(.map__pin--main)').forEach(function (pin) {
       pin.remove();
     });
   };
@@ -73,13 +70,9 @@
     }
   };
 
-  // var renderPinsDebounce = window.debounce(renderPins);
-  // mapFilter.addEventListener('change', renderPinsDebounce);
-
   mapPin.addEventListener('mousedown', renderPinsClick);
   mapPin.addEventListener('keydown', renderPinsEnter);
 
-  // Определение начальных координат метки
   var address = document.querySelector('#address');
 
   var renderInactivePosition = function () {
@@ -94,6 +87,7 @@
 
   window.pin = {
     renderPins: renderPins,
-    renderActivePosition: renderActivePosition
+    renderActivePosition: renderActivePosition,
+    clearPins: clearPins
   };
 })();

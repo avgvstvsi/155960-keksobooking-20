@@ -8,35 +8,40 @@
   var housingPrice = mapFilters.querySelector('#housing-price');
   var housingRooms = mapFilters.querySelector('#housing-rooms');
   var housingGuests = mapFilters.querySelector('#housing-guests');
+
   var priceMap = {
-    'middle': {
+    middle: {
       from: 10000,
       to: 50000
     },
-    'low': {
+    low: {
       from: 0,
       to: 9999
     },
-    'high': {
+    high: {
       from: 50001,
       to: 100000
     }
   };
 
   var filterHousingType = (function (adv) {
-    return housingType.value === DEFAULT_FILTER || housingType.value === adv.offer.type;
+    return housingType.value === DEFAULT_FILTER ||
+    housingType.value === adv.offer.type;
   });
 
   var filterHousingPrice = function (adv) {
-    return housingPrice.value === DEFAULT_FILTER || adv.offer.price >= priceMap[housingPrice.value].from && adv.offer.price <= priceMap[housingPrice.value].to;
+    return housingPrice.value === DEFAULT_FILTER ||
+    adv.offer.price >= priceMap[housingPrice.value].from && adv.offer.price <= priceMap[housingPrice.value].to;
   };
 
   var filterHousingRooms = (function (adv) {
-    return housingRooms.value === DEFAULT_FILTER || Number(housingRooms.value) === adv.offer.rooms;
+    return housingRooms.value === DEFAULT_FILTER ||
+    Number(housingRooms.value) === adv.offer.rooms;
   });
 
   var filterHousingGuests = (function (adv) {
-    return housingGuests.value === DEFAULT_FILTER || Number(housingGuests.value) === adv.offer.guests;
+    return housingGuests.value === DEFAULT_FILTER ||
+    Number(housingGuests.value) === adv.offer.guests;
   });
 
   var filterHousingFeatures = function (adv) {
@@ -48,16 +53,13 @@
   };
 
   var updateOffers = function (offers) {
-    var offersCopy = offers.slice();
-    var filterValue = [];
-    filterValue = offersCopy.filter(function (adv) {
+    return offers.slice().filter(function (adv) {
       return filterHousingType(adv) &&
       filterHousingPrice(adv) &&
       filterHousingRooms(adv) &&
       filterHousingGuests(adv) &&
       filterHousingFeatures(adv);
     });
-    return filterValue;
   };
 
   var activateFilters = function (offers) {

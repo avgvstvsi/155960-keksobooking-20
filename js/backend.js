@@ -4,6 +4,7 @@
   var load = function (onSuccess, onError) {
     var URL = 'https://javascript.pages.academy/keksobooking/data';
     var TIMEOUT_IN_MS = 10000;
+
     var StatusCode = {
       OK: 200
     };

@@ -1,10 +1,9 @@
 'use strict';
 
 (function () {
+  var ESCAPE = 27;
+
   var mapFaded = document.querySelector('.map');
-  var cardTemplate = document.querySelector('#card')
-  .content
-  .querySelector('.map__card');
 
   var ImgProperties = {
     WIDTH: '45px',
@@ -12,7 +11,9 @@
     ALT: 'Фотография жилья',
   };
 
-  var ESCAPE = 27;
+  var cardTemplate = document.querySelector('#card')
+  .content
+  .querySelector('.map__card');
 
   var getPinCardData = function (data) {
     var cardElement = cardTemplate.cloneNode(true);
@@ -84,11 +85,11 @@
     var popupFeatures = cardElement.querySelector('.popup__features');
     var fragment = document.createDocumentFragment();
     popupFeatures.textContent = '';
-    for (var i = 0; i < data.offer.features.length; i++) {
+    data.offer.features.forEach(function (feature) {
       var featureItem = document.createElement('li');
-      featureItem.classList = 'popup__feature popup__feature--' + data.offer.features[i];
+      featureItem.classList = 'popup__feature popup__feature--' + feature;
       fragment.appendChild(featureItem);
-    }
+    });
     popupFeatures.appendChild(fragment);
   };
 

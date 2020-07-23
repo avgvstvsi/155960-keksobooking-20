@@ -2,11 +2,12 @@
 
 (function () {
   var mapPin = document.querySelector('.map__pin--main');
+  var blockAdress = document.querySelector('#address');
+
   var MapPinSize = {
     WIDTH: 62,
     HEIGHT: 84,
   };
-  var blockAdress = document.querySelector('#address');
 
   var CoordinatesLimit = {
     X_MIN: 0,

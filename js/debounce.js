@@ -3,7 +3,7 @@
 (function () {
   var DEBOUNCE_INTERVAL = 300;
 
-  window.debounce = function (callback) {
+  window.debounce = function (cb) {
     var lastTimeout = null;
     return function () {
       var settings = arguments;
@@ -11,7 +11,7 @@
         window.clearTimeout(lastTimeout);
       }
       lastTimeout = window.setTimeout(function () {
-        callback.apply(null, settings);
+        cb.apply(null, settings);
       }, DEBOUNCE_INTERVAL);
     };
   };

@@ -1,11 +1,10 @@
 'use strict';
 
 (function () {
-  var adForm = document.querySelector('.ad-form');
-
   var NUMBER_OF_ROOMS = '100';
 
-  // Валидация соответствия гостей и комнат
+  var adForm = document.querySelector('.ad-form');
+
   var guests = adForm.querySelector('select[name="capacity"');
   var rooms = adForm.querySelector('select[name="rooms"]');
   var inputPrice = adForm.querySelector('#price');
