@@ -6,6 +6,7 @@
   var mapFaded = document.querySelector('.map');
   var mapFilter = document.querySelector('.map__filters');
   var mapFilterInputs = mapFilter.children;
+  var adFormReset = adForm.querySelector('.ad-form__reset');
   var offers = [];
 
   var hidingForms = function (element, isDisabled) {
@@ -40,7 +41,17 @@
     window.pin.clearPins();
     window.avatar.removeHousePhotos();
     window.avatar.removeHeaderPhotos();
+    window.pin.setDefaultPosition();
   };
+
+  var pageReset = function () {
+    adForm.reset();
+    mapFilter.reset();
+    hideForms();
+  };
+
+  adFormReset.addEventListener('click', pageReset);
+  adFormReset.addEventListener('keydown', pageReset);
 
   window.main = {
     showForms: showForms,

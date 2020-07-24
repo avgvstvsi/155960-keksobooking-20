@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  var MAP_PIN_SIZE = 62;
-  var MAP_PIN_STING = 22;
   var MAX_PINS = 5;
   var ENTER = 13;
   var MAIN_BUTTON = 0;
@@ -10,6 +8,13 @@
   var mapFaded = document.querySelector('.map');
   var mapPin = document.querySelector('.map__pin--main');
   var mapPins = document.querySelector('.map__pins');
+
+  var MapPinAttribute = {
+    SIZE: 62,
+    STING: 22,
+    TOP: 375,
+    LEFT: 570
+  };
 
   var MapSize = {
     WIDTH: 1200,
@@ -47,8 +52,6 @@
     for (var i = 0; i < pinsCount; i++) {
       fragment.appendChild(getPinTemplate(pinsData[i]));
     }
-    mapPin.removeEventListener('mousedown', renderPinsClick);
-    mapPin.removeEventListener('keydown', renderPinsEnter);
     return mapPins.appendChild(fragment);
   });
 
@@ -82,12 +85,18 @@
   renderInactivePosition();
 
   var renderActivePosition = function () {
-    address.value = Math.floor(MapSize.WIDTH / 2) + ', ' + Math.floor((MapSize.HEIGHT / 2) + (MAP_PIN_SIZE / 2) + MAP_PIN_STING);
+    address.value = Math.floor(MapSize.WIDTH / 2) + ', ' + Math.floor((MapSize.HEIGHT / 2) + (MapPinAttribute.SIZE / 2) + MapPinAttribute.STING);
+  };
+
+  var setDefaultPosition = function () {
+    mapPin.style.left = MapPinAttribute.LEFT + 'px';
+    mapPin.style.top = MapPinAttribute.TOP + 'px';
   };
 
   window.pin = {
     renderPins: renderPins,
     renderActivePosition: renderActivePosition,
-    clearPins: clearPins
+    clearPins: clearPins,
+    setDefaultPosition: setDefaultPosition
   };
 })();
