@@ -58,8 +58,7 @@
   };
 
   var removeHeaderPhotos = function () {
-    var headerPhotosPreview = document.querySelector('.ad-form-header__preview img');
-    headerPhotosPreview.remove();
+    headerPreview.src = 'img/muffin-grey.svg';
   };
 
   headerPreviewField.addEventListener('change', function () {

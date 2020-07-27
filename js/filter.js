@@ -62,11 +62,10 @@
     });
   };
 
-  var activateFilters = function (offers) {
-
+  var activate = function (offers) {
     var makeFilterFormActive = function () {
-      window.card.closeCard();
-      window.pin.renderPins(updateOffers(offers));
+      window.card.close();
+      window.pin.renderAll(updateOffers(offers));
     };
 
     mapFilters.addEventListener('change', makeFilterFormActive);
@@ -74,7 +73,7 @@
 
   window.filter = {
     updateOffers: updateOffers,
-    activateFilters: activateFilters
+    activate: activate
   };
 
 }());

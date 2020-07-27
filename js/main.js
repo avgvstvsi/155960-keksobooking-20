@@ -5,15 +5,15 @@
   var adFormInputs = adForm.querySelectorAll('fieldset');
   var mapFaded = document.querySelector('.map');
   var mapFilter = document.querySelector('.map__filters');
-  var mapFilterInputs = mapFilter.children;
+  var mapFilterInputs = mapFilter.querySelectorAll('select, fieldset');
   var adFormReset = adForm.querySelector('.ad-form__reset');
   var offers = [];
 
-  var hidingForms = function (element, isDisabled) {
-    for (var i = 0; i < element.length; i++) {
-      element[i].disabled = isDisabled;
-    }
-  };
+  function hidingForms(elements, state) {
+    elements.forEach(function (select) {
+      select.disabled = state;
+    });
+  }
 
   hidingForms(mapFilterInputs, true);
   hidingForms(adFormInputs, true);
@@ -27,9 +27,9 @@
     window.form.getRoomsAndGuests();
     window.backend.load(function (pinsData) {
       offers = pinsData;
-      window.filter.activateFilters(offers);
+      window.filter.activate(offers);
       var filtredOffers = window.filter.updateOffers(offers);
-      window.pin.renderPins(filtredOffers);
+      window.pin.renderAll(filtredOffers);
     }, function () {});
   };
 
@@ -38,7 +38,7 @@
     adForm.classList.add('ad-form--disabled');
     hidingForms(mapFilterInputs, true);
     hidingForms(adFormInputs, true);
-    window.pin.clearPins();
+    window.pin.clear();
     window.avatar.removeHousePhotos();
     window.avatar.removeHeaderPhotos();
     window.pin.setDefaultPosition();

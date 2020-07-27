@@ -2,6 +2,12 @@
 
 (function () {
   var NUMBER_OF_ROOMS = '100';
+  var MIN_PRICE = {
+    flat: 1000,
+    house: 5000,
+    palace: 10000,
+    bungalo: 0
+  };
 
   var adForm = document.querySelector('.ad-form');
 
@@ -24,23 +30,9 @@
     }
   };
 
-  var getMinPrice = function (type) {
-    switch (type) {
-      case 'flat':
-        return 1000;
-      case 'house':
-        return 5000;
-      case 'palace':
-        return 10000;
-      case 'bungalo':
-      default:
-        return 0;
-    }
-  };
-
   var changeMinPriceValue = function () {
-    inputPrice.min = getMinPrice(selectType.value);
-    inputPrice.placeholder = getMinPrice(selectType.value);
+    inputPrice.min = MIN_PRICE[selectType.value];
+    inputPrice.placeholder = MIN_PRICE[selectType.value];
   };
 
   rooms.addEventListener('change', getRoomsAndGuests);

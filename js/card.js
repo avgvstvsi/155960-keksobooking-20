@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var ESCAPE = 27;
 
   var mapFaded = document.querySelector('.map');
 
@@ -59,12 +58,12 @@
     var mapFiltersContainer = document.querySelector('.map__filters-container');
     var closeCardBtn = cardElement.querySelector('.popup__close');
     var onCloseCardEnter = function () {
-      closeCard();
+      close();
       closeCardBtn.removeEventListener('click', onCloseCardEnter);
     };
     var onCloseCardEsc = function (evt) {
-      if (evt.keyCode === ESCAPE) {
-        closeCard();
+      if (evt.key === 'Escape') {
+        close();
         closeCardBtn.removeEventListener('keydown', onCloseCardEsc);
         document.removeEventListener('keydown', onCloseCardEsc);
       }
@@ -74,7 +73,7 @@
     mapFaded.insertBefore(cardElement, mapFiltersContainer);
   };
 
-  var closeCard = function () {
+  var close = function () {
     var popup = document.querySelector('.popup');
     if (popup) {
       popup.remove();
@@ -95,6 +94,6 @@
 
   window.card = {
     getPinCardData: getPinCardData,
-    closeCard: closeCard
+    close: close
   };
 })();
