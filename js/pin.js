@@ -66,13 +66,13 @@
   };
 
   var renderPinsClick = function (evt) {
-    if (evt.button === MAIN_BUTTON) {
+    if (evt.button === window.util.KeyCode.MAIN_BUTTON) {
       window.main.showForms();
     }
   };
 
   var renderPinsEnter = function (evt) {
-    if (evt.key === 'Enter') {
+    if (evt.key === window.util.KeyCode.ENTER) {
       window.main.showForms();
     }
   };

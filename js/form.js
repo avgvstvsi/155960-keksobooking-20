@@ -56,7 +56,7 @@
     main.appendChild(successForm);
 
     var onEscPress = function (evt) {
-      if (evt.key === 'Escape') {
+      if (evt.key === window.util.KeyCode.ESCAPE) {
         successForm.remove();
       }
       document.removeEventListener('keydown', onEscPress);
@@ -82,7 +82,7 @@
     main.appendChild(errorForm);
 
     var onEscPress = function (evt) {
-      if (evt.key === 'Escape') {
+      if (evt.key === window.util.KeyCode.ESCAPE) {
         errorForm.remove();
       }
       document.removeEventListener('keydown', onEscPress);

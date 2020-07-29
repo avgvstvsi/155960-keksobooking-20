@@ -62,7 +62,7 @@
       closeCardBtn.removeEventListener('click', onCloseCardEnter);
     };
     var onCloseCardEsc = function (evt) {
-      if (evt.key === 'Escape') {
+      if (evt.key === window.util.KeyCode.ESCAPE) {
         close();
         closeCardBtn.removeEventListener('keydown', onCloseCardEsc);
         document.removeEventListener('keydown', onCloseCardEsc);
