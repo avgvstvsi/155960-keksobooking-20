@@ -2,7 +2,6 @@
 
 (function () {
   var MAX_PINS = 5;
-  var MAIN_BUTTON = 0;
 
   var mapFaded = document.querySelector('.map');
   var mapPin = document.querySelector('.map__pin--main');
